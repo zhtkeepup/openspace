@@ -1,6 +1,7 @@
 用 Python 从零开始创建区块链.
 
 ```
+# 参考链接
 https://learnblockchain.cn/2017/10/27/build_blockchain_by_python/
 ```
 
