@@ -23,17 +23,19 @@ def main(nickName = "zhtkeepup", oCount = 4):
         nickName = "zhtkeepup"
     t1 = time.time()
     nonce = 0
+    sss = ""
     while True:
-        s256 = sha256("%s%d" % (nickName, nonce) )
-        if s256[ : oCount] == "0000000000"[ : oCount] :
+        sss = sha256("%s%d" % (nickName, nonce) )
+        if sss[ : oCount] == "0000000000"[ : oCount] :
             t2 = time.time()
             break
         nonce += 1
-    return t2 - t1
+    return (t2 - t1, sss)
 
 if __name__ == "__main__":
     for k in range(4, 8):
-        print("计算%d个0开头的哈希值耗时 %.4f 秒.\n\n" % (k, main(oCount = k)) )
+        t, s = main(oCount = k)
+        print("计算%d个0开头的哈希值耗时 %.4f 秒. 结果=%s\n\n" % (k, t, s) )
 
     
 
