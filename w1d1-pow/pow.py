@@ -32,6 +32,7 @@ def main(nickName = "zhtkeepup", oCount = 4):
         nonce += 1
     return (t2 - t1, sss)
 
+# 123
 if __name__ == "__main__":
     for k in range(4, 8):
         t, s = main(oCount = k)
