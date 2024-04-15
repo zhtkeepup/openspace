@@ -15,7 +15,7 @@ def sha256(text: str):
     # print(text)
     return hashlib.sha256(text.encode()).hexdigest()
 
-def main(nickName = "zhtkeepup", oCount = 4):
+def pow2(nickName = "zhtkeepup", oCount = 4):
     if oCount > 10:
         raise Exception("error!")
     
@@ -28,15 +28,16 @@ def main(nickName = "zhtkeepup", oCount = 4):
         sss = sha256("%s%d" % (nickName, nonce) )
         if sss[ : oCount] == "0000000000"[ : oCount] :
             t2 = time.time()
+            print(sss)
             break
         nonce += 1
-    return (t2 - t1, sss)
+    return "%s%d" % (nickName, nonce)
 
 # 123
 if __name__ == "__main__":
-    for k in range(4, 8):
-        t, s = main(oCount = k)
-        print("计算%d个0开头的哈希值耗时 %.4f 秒. 结果=%s\n\n" % (k, t, s) )
+    k = 4
+    nick_nonce = pow2(oCount = k)
+    print("符合%d个0开头哈希值的nick_nonce=%s\n\n" % (k, nick_nonce) )
 
     
 
