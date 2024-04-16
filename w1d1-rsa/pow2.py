@@ -16,8 +16,6 @@ def sha256(text: str):
     return hashlib.sha256(text.encode()).hexdigest()
 
 def pow2(nickName = "zhtkeepup", oCount = 4):
-    if oCount > 10:
-        raise Exception("error!")
     
     if nickName == None or nickName.strip()=="":
         nickName = "zhtkeepup"
@@ -26,7 +24,7 @@ def pow2(nickName = "zhtkeepup", oCount = 4):
     sss = ""
     while True:
         sss = sha256("%s%d" % (nickName, nonce) )
-        if sss[ : oCount] == "0000000000"[ : oCount] :
+        if sss[ : oCount] == "0" * oCount :
             t2 = time.time()
             print(sss)
             break

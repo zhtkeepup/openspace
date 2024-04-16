@@ -118,7 +118,7 @@ class Blockchain(object):
         }
 
         # Reset the current list of transactions
-        self.current_transactions = []  # 这里被重置，上面block里transactions的值不会被改吗？
+        self.current_transactions = []  #
 
         self.chain.append(block)
         return block
