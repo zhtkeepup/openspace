@@ -14,7 +14,7 @@ add(x) 方法: 给变量加上 x 。
 
 --
 
-### 交易 hash
+### add 交易 hash
 
 ```
 https://sepolia.etherscan.io/tx/0x2c0c981c8ed67d3efe3522a0d8976ab465cc11db27ebe6d541c56ed9bb2cbf44
