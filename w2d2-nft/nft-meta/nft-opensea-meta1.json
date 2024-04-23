@@ -1,0 +1,15 @@
+{
+    "description": "zhtkeepup's first nft in first nft contract", 
+    "external_url": "https://teal-fancy-flyingfish-942.mypinata.cloud/ipfs/QmYoGBBqKUYNUsM1sR5ER5Mjhy2ZUsH7XZMM1xZDDfUR4n/1.png", 
+    "image": "https://teal-fancy-flyingfish-942.mypinata.cloud/ipfs/QmYoGBBqKUYNUsM1sR5ER5Mjhy2ZUsH7XZMM1xZDDfUR4n/1.png", 
+    "name": "zk01nft",
+    "attributes": [ 
+        {
+            "trait_type": "rarity", 
+            "value": "legend"
+        },
+        {
+            "trait_type": "number", 
+            "value": 1
+        } ]
+  }
