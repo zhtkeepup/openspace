@@ -15,7 +15,7 @@ import "./IERC721TokenReceiver.sol";
 // , IERC721Metadata {
 contract MyERC721 is IERC165, IERC721, IERC721Metadata {
     error ERC721CanNotBeZeroAddr();
-    error ERC721IsNotOwnerOfNFT(uint256);
+    error ERC721IsNotOwnerOfNFT(uint256, address, address);
     error ERC721TokenIdIsInvalid(uint256);
     error ERC721InvalidReceiver(address);
     error ERC721TokenIdIsExists(uint256);
@@ -146,9 +146,18 @@ contract MyERC721 is IERC165, IERC721, IERC721Metadata {
         if (oldOwner == address(0)) {
             revert ERC721TokenIdIsInvalid(_tokenId);
         }
-        if (oldOwner != msg.sender || oldOwner != _from) {
-            revert ERC721IsNotOwnerOfNFT(_tokenId);
+        if (oldOwner != _from) {
+            revert ERC721IsNotOwnerOfNFT(_tokenId, msg.sender, _from);
         }
+
+        if (
+            oldOwner != msg.sender &&
+            tokenApprovals[_tokenId] != msg.sender &&
+            operatorApprovals[_from][msg.sender] != true
+        ) {
+            revert ERC721IsNotOwnerOfNFT(_tokenId, msg.sender, msg.sender);
+        }
+
         if (_to == address(0)) {
             revert ERC721CanNotBeZeroAddr();
         }
@@ -173,7 +182,7 @@ contract MyERC721 is IERC165, IERC721, IERC721Metadata {
             owners[_tokenId] != msg.sender &&
             tokenApprovals[_tokenId] != msg.sender
         ) {
-            revert ERC721IsNotOwnerOfNFT(_tokenId);
+            revert ERC721IsNotOwnerOfNFT(_tokenId, msg.sender, msg.sender);
         }
         tokenApprovals[_tokenId] = _approved;
 

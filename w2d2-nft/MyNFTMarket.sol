@@ -6,7 +6,7 @@ import "./IERC721TokenReceiver.sol";
 import "./IERC721.sol";
 import "./BaseERC20.sol";
 
-contract NFTMarket is IERC721TokenReceiver {
+contract MyNFTMarket is IERC721TokenReceiver {
     mapping(uint => uint) public tokenIdPrice;
     mapping(uint => address) public tokenSeller;
     address public immutable token;
