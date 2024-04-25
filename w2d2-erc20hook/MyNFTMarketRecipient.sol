@@ -19,10 +19,6 @@ contract MyNFTMarketRecipient is MyNFTMarket, IERC777TokensRecipient {
         uint256 amount,
         bytes calldata data /*传入data格式，uint256 tokenId*/
     ) external override returns (bytes4 retval) {
-        if (to != address(this)) {
-            revert MyNFTMarketNotTransferToMe();
-        }
-
         if (address(msg.sender) != token) {
             revert MyNFTMarketForbidden();
         }

@@ -14,10 +14,6 @@ contract TokensBankRecipient is TokenBank, IERC777TokensRecipient {
         uint256 amount,
         bytes calldata data
     ) external override returns (bytes4 retval) {
-        if (to != address(this)) {
-            revert BankNotTransferToMe();
-        }
-
         // token的地址、 账户的地址、 账户对应的token余额
         // mapping(address => mapping(address => uint256)) public userTokenBalances;
 
