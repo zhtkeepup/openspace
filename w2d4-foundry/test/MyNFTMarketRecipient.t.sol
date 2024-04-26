@@ -13,10 +13,7 @@ import {MyNFTMarketRecipient} from "../src/w2d2-erc20hook/MyNFTMarketRecipient.s
 import {ERC20hook} from "../src/w2d2-erc20hook/ERC20Hook.sol";
 import {MyERC721} from "../src/w2d2-nft/MyERC721.sol";
 
-
 contract MyNFTMarketRecipientTest is Test {
-
-
     MyNFTMarketRecipient nftMarket; //  = new Bank();
     ERC20hook token;
     MyERC721 nftToken;
@@ -65,7 +62,6 @@ contract MyNFTMarketRecipientTest is Test {
         nftMarket.list(_tokenId, 10000);
 
         vm.stopPrank();
-
 
         vm.startPrank(eve);
 

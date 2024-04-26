@@ -21,4 +21,23 @@ contract CounterTest is Test {
         counter.setNumber(x);
         assertEq(counter.number(), x);
     }
+
+    event Transfer(address indexed from, address indexed to, uint256 amount);
+
+    function testFail_shouldNoEvent() public {
+        Contract001 cc = new Contract001();
+
+        vm.expectEmit(false, false, false, false);
+        emit Transfer(address(0), address(1337), 1337);
+
+        cc.eFun1();
+    }
+}
+
+contract Contract001 {
+    event Transfer(address indexed from, address indexed to, uint256 amount);
+
+    function eFun1() public {
+        // emit Transfer(msg.sender, address(1337), 1337);
+    }
 }

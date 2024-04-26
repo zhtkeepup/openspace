@@ -1,3 +1,30 @@
 [submodule "w2d4-foundry/lib/forge-std"]
 	path = w2d4-foundry/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "hello_foundry/lib/forge-std"]
+	path = hello_foundry/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "hello_foundry/lib/openzeppelin-contracts"]
+	path = hello_foundry/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "hello_foundry/lib/solmate"]
+	path = hello_foundry/lib/solmate
+	url = https://github.com/transmissions11/solmate
+[submodule "solidity-scripting/lib/forge-std"]
+	path = solidity-scripting/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "solidity-scripting/lib/solmate"]
+	path = solidity-scripting/lib/solmate
+	url = https://github.com/transmissions11/solmate
+[submodule "solidity-scripting/lib/openzeppelin-contracts"]
+	path = solidity-scripting/lib/openzeppelin-contracts
+	url = https://github.com/Openzeppelin/openzeppelin-contracts
+[submodule "w2d5-forge-script/lib/forge-std"]
+	path = w2d5-forge-script/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "w2d5-forge-script/lib/solmate"]
+	path = w2d5-forge-script/lib/solmate
+	url = https://github.com/transmissions11/solmate
+[submodule "w2d5-forge-script/lib/openzeppelin-contracts"]
+	path = w2d5-forge-script/lib/openzeppelin-contracts
+	url = https://github.com/Openzeppelin/openzeppelin-contracts
