@@ -1,0 +1,23 @@
+
+### 获取项目模板并启动项目
+git clone https://github.com/0xqige/openspace-nftrent-study
+cd openspace-nftrent-study/
+npm install -g pnpm
+cd web/
+npm install
+pnpm dev
+
+# 浏览器访问 http://localhost:3001 观看效果.
+
+
+### 网站托管： https://vercel.com/home
+
+
+
+# 安装 wagmi
+# 位于web目录 :
+pnpm add wagmi viem@2.x @tanstack/react-query
+
+
+# 安装viem
+pnpm i viem

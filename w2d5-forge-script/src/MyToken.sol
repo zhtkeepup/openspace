@@ -10,4 +10,5 @@ contract MyToken is ERC20 {
     ) ERC20(name_, symbol_) {
         _mint(msg.sender, 1e10 * 1e18);
     }
+    function aa(uint256 xx) {}
 }
