@@ -1,0 +1,4 @@
+  cd wagmi-project
+  pnpm install
+  pnpm run dev
+

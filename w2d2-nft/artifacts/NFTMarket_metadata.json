@@ -1,0 +1,220 @@
+{
+	"compiler": {
+		"version": "0.8.25+commit.b61c2a91"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_nftToken",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "buy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "list",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nftToken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC721Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenIdPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenSeller",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"zhtkeepup/openspace/w2d2-nft/MyNFTMarket.sol": "NFTMarket"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"zhtkeepup/openspace/w2d2-nft/BaseERC20.sol": {
+			"keccak256": "0x9df51c66d770914e71b6ff9fabb6d1d6174bcda635f79aa4e7ef533c5b324d7c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://89e9e65ddb87622761380cc39cfc6405343d855b2fa662c11a51834cf9e60146",
+				"dweb:/ipfs/QmY24jrArBSQ32ADf9KF4iDuGHghiyjYch54HaftQdboQ1"
+			]
+		},
+		"zhtkeepup/openspace/w2d2-nft/IERC721.sol": {
+			"keccak256": "0x41ca1b57f283df6b949db8d8a4bc756638399ff0778601faccb7ca0d4511595c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://47d4ef8f8513dacd06ed4b5002f242ae27a326daca767d155c157d396220d57f",
+				"dweb:/ipfs/QmbvdNNszuK7YtTcT8W4xheBwagiZWuC7cXma9FQ6aXMgC"
+			]
+		},
+		"zhtkeepup/openspace/w2d2-nft/IERC721TokenReceiver.sol": {
+			"keccak256": "0x782d78af255b2050214601fd724942d6696b35a18c539f67b4756be211d7677a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ec10d4f1aeaa98bdeaef12ca0f1aca9e79fe515c5318ff1c1efc3e77dec53f9",
+				"dweb:/ipfs/QmdU7gFg8zQkPwQ9jQYDr5HS7aszaQjZq9b6FEZHPRcmTb"
+			]
+		},
+		"zhtkeepup/openspace/w2d2-nft/MyNFTMarket.sol": {
+			"keccak256": "0x93403eb3904aa92082982f9381d8d9289afb14210801c480e21ee31f377f8e06",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5bba4052d35eab22b47b114f8945b45f6c04a058c2ed7a53c5b4275fa6722fa8",
+				"dweb:/ipfs/QmUcuTcGb58RxfW71bGvEoPv7kD9SuSbaBRYPGsG5Xnvrd"
+			]
+		}
+	},
+	"version": 1
+}

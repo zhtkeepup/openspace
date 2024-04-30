@@ -1,0 +1,80 @@
+{
+	"compiler": {
+		"version": "0.8.25+commit.b61c2a91"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "tokensReceived",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "retval",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"IERC777TokensRecipient.sol": "IERC777TokensRecipient"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"IERC777TokensRecipient.sol": {
+			"keccak256": "0x132b9d87e0adb9e111e9bc502b09e6312565e2e8345b799cfe8bb39acf6486d8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a6bb998b91220091a5851bd57f06d9278a4edadec3c223028ca50f22b484e339",
+				"dweb:/ipfs/QmbbneSkB2RssBzyWksQZRk7und1ktKB5DmFz91o7ikwdR"
+			]
+		}
+	},
+	"version": 1
+}

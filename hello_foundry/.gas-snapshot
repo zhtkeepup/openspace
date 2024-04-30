@@ -1,0 +1,5 @@
+CounterTest:testFuzz_SetNumber(uint256) (runs: 257, μ: 34353, ~: 34508)
+CounterTest:test_Increment() (gas: 31325)
+OwnerUpOnlyTest:test_IncrementAsOwner() (gas: 11878)
+SafeTest:test_Withdraw() (gas: 28588)
+SafeTest:test_fuzz_Withdraw(uint256) (runs: 256, μ: 22997, ~: 23155)

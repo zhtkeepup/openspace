@@ -1,0 +1,176 @@
+{
+	"compiler": {
+		"version": "0.8.25+commit.b61c2a91"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "BankNotTransferToMe",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "deposit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "tokensReceived",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "retval",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "userTokenBalances",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"deposit(address,uint256)": {
+					"notice": "指定代币地址与金额，向银行存入该代币."
+				},
+				"withdraw(address,uint256)": {
+					"notice": "用户从银行提取自己的token"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"TokensRecipientBank.sol": "TokensRecipientBank"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"BaseERC20.sol": {
+			"keccak256": "0x9df51c66d770914e71b6ff9fabb6d1d6174bcda635f79aa4e7ef533c5b324d7c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://89e9e65ddb87622761380cc39cfc6405343d855b2fa662c11a51834cf9e60146",
+				"dweb:/ipfs/QmY24jrArBSQ32ADf9KF4iDuGHghiyjYch54HaftQdboQ1"
+			]
+		},
+		"IERC777TokensRecipient.sol": {
+			"keccak256": "0x132b9d87e0adb9e111e9bc502b09e6312565e2e8345b799cfe8bb39acf6486d8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a6bb998b91220091a5851bd57f06d9278a4edadec3c223028ca50f22b484e339",
+				"dweb:/ipfs/QmbbneSkB2RssBzyWksQZRk7und1ktKB5DmFz91o7ikwdR"
+			]
+		},
+		"TokenBank.sol": {
+			"keccak256": "0xce49179a9224f76612a159759d97ced95125793a6d9e6d5c781491947804fc40",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b7ca21747e59503582b6c45b7b11c09773e7f123cb8904d5f6180e8463a30231",
+				"dweb:/ipfs/QmP7yQ5JDQ8HiAHNsSnafC17hTKnsx8L1BCqTcdsmYvUYp"
+			]
+		},
+		"TokensRecipientBank.sol": {
+			"keccak256": "0x2188bf24fcfdb5cecea235dd0efff63569d52636c023077f6e984a6cd5a4ca6d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4b4aa2be5f0df61e0cbd5e9a8394426d7aacc49c978d0776eb4226768679b799",
+				"dweb:/ipfs/QmVu2nFWitJjRUETs1soVaZATwCm5qcN8mjKUAktpcc65m"
+			]
+		}
+	},
+	"version": 1
+}
