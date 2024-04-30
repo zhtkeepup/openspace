@@ -12,7 +12,11 @@ import {
   Transfer
 } from "../generated/schema"
 
+import {BigInt, Bytes} from "@graphprotocol/graph-ts"
+
 import { S2NFT } from "../generated/templates/S2NFT/S2NFT"
+
+import { S2NFT as S2NFTDatasource } from "../generated/templates"
 
 export function handleNFTCreated(event: NFTCreatedEvent): void {
   let entity = new NFTCreated(
@@ -26,6 +30,7 @@ export function handleNFTCreated(event: NFTCreatedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+  S2NFTDatasource.create(event.params.nftCA);
 }
 
 export function handleNFTRegesitered(event: NFTRegesiteredEvent): void {
@@ -78,6 +83,18 @@ export function handleTransfer(
     tokenInfo.tokenURL = contract.tokenURI(tokenInfo.tokenId);
     tokenInfo.name = contract.name();
     tokenInfo.owner = entity.to;
+
+    event.block.number = BigInt.zero();
+    tokenInfo.blockTimestamp = BigInt.zero();
+    tokenInfo.transactionHash = Bytes.fromI32(0);
+    // if(event.block.number === null) {
+    //   tokenInfo.blockNumber = BigInt.zero();
+    // } else {
+    //   tokenInfo.blockNumber = event.block.number;
+    // }
+    // tokenInfo.blockTimestamp = event.block.timestamp === null ? BigInt.zero() : event.block.timestamp;
+    // tokenInfo.transactionHash = event.transaction.hash === null ? Bytes.fromI32(0) : event.transaction.hash;
+
     tokenInfo.save();
   }
 
