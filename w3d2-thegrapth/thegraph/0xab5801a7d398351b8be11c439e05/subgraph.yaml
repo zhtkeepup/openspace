@@ -5,52 +5,42 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: ContractUSDT
+    name: Vitalik_0xab5801a7
     network: mainnet
     source:
-      address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-      abi: ContractUSDT
-      startBlock: 4634748
+      abi: erc20
+      startBlock: 19774960
+      endBlock: 19774995
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Issue
-        - Redeem
-        - Deprecate
-        - Params
-        - DestroyedBlackFunds
-        - AddedBlackList
-        - RemovedBlackList
-        - Approval
         - Transfer
-        - Pause
-        - Unpause
       abis:
-        - name: ContractUSDT
-          file: ./abis/ContractUSDT.json
+        - name: erc20
+          file: ./abis/erc20.json
       eventHandlers:
-        - event: Issue(uint256)
-          handler: handleIssue
-        - event: Redeem(uint256)
-          handler: handleRedeem
-        - event: Deprecate(address)
-          handler: handleDeprecate
-        - event: Params(uint256,uint256)
-          handler: handleParams
-        - event: DestroyedBlackFunds(address,uint256)
-          handler: handleDestroyedBlackFunds
-        - event: AddedBlackList(address)
-          handler: handleAddedBlackList
-        - event: RemovedBlackList(address)
-          handler: handleRemovedBlackList
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-        - event: Pause()
-          handler: handlePause
-        - event: Unpause()
-          handler: handleUnpause
-      file: ./src/contract-usdt.ts
+      file: ./src/erc20.ts
+
+templates:
+  - name: erc20
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: erc20
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: erc20
+          file: ./abis/erc20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/erc20.ts

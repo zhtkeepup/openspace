@@ -1,0 +1,35 @@
+query querySnap {
+  erc20BalanceSnapshots(
+    where: {
+      acctAddr: "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2"
+      tokenAddr: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+    }
+  ) {
+    id
+    acctAddr
+    tokenAddr
+    tokenName
+    tokenDecimals
+    balance
+    snapshotBlockNumber
+    snapshotBlockTimestamp
+    snapshotTransactionHash
+    tranCountSinceLast
+  }
+
+  erc20Transactions(
+    where: {
+      acctAddr: "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2"
+      tokenAddr: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+    }
+  ) {
+    id
+    acctAddr
+    oppoAddr
+    tokenAddr
+    value
+    blockNumber
+    blockTimestamp
+    transactionHash
+  }
+}
