@@ -17,6 +17,8 @@ import {
   BigInt,
   Int8,
   BigDecimal,
+  ethereum,
+  Address
 } from "@graphprotocol/graph-ts";
 
 
@@ -60,7 +62,20 @@ function _handleTransfer(event: TransferEvent, type: number): void {
 
 
 
+/*
 
+let tupleArray: Array<ethereum.Value> = [
+  ethereum.Value.fromAddress(Address.fromString('0x0000000000000000000000000000000000000420')),
+  ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(62)),
+]
+
+let tuple = tupleArray as ethereum.Tuple
+
+let encoded = ethereum.encode(ethereum.Value.fromTuple(tuple))!
+
+let decoded = ethereum.decode('(address,uint256)', encoded)
+
+*/
       // 临时:
       // let erc20Contract = Erc20Contract.bind(event.address);
       // if(erc20Contract.try_balanceOf(acctAddr).reverted) {
