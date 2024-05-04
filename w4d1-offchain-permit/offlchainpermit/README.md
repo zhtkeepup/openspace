@@ -9,3 +9,7 @@
 1. 有 Token 存款及 NFT 购买成功的测试用例
 2. 有测试用例运行日志或截图，能够看到 Token 及 NFT 转移。
 3. 请填写你的 Github 项目链接地址。
+
+## 关键测试 nft market 里 nft 购买和转移的测试截图:
+
+![测试结果](./resources/1.png)
