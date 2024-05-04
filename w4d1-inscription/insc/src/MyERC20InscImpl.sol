@@ -19,6 +19,7 @@ contract MyERC20InscImpl is ERC20Hook {
     constructor(address _factory) {
         // _mint(msg.sender, 1000 * 10 ** 18);
         factory = _factory;
+        inited = true; // “实现合约”本身，没必要再被调用 initDeploy
     }
 
     function initDeploy(
