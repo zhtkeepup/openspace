@@ -52,3 +52,24 @@
 [submodule "w4d1-offline-permit/offlinepermit/lib/openzeppelin-contracts"]
 	path = w4d1-offline-permit/offlinepermit/lib/openzeppelin-contracts
 	url = https://github.com/Openzeppelin/openzeppelin-contracts
+[submodule "w4d1-upgrade-market/erc20_upgradeable/lib/forge-std"]
+	path = w4d1-upgrade-market/erc20_upgradeable/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "w4d1-upgrade-market/erc20_upgradeable/lib/openzeppelin-contracts"]
+	path = w4d1-upgrade-market/erc20_upgradeable/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "w4d1-upgrade-market/erc20_upgradeable/lib/openzeppelin-foundry-upgrades"]
+	path = w4d1-upgrade-market/erc20_upgradeable/lib/openzeppelin-foundry-upgrades
+	url = https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades
+[submodule "w4d1-upgrade-market/erc20_upgradeable/lib/openzeppelin-contracts-upgradeable"]
+	path = w4d1-upgrade-market/erc20_upgradeable/lib/openzeppelin-contracts-upgradeable
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable
+[submodule "w4d1-upgrade-market/nftmarket-permitlist/lib/forge-std"]
+	path = w4d1-upgrade-market/nftmarket-permitlist/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "w4d1-upgrade-market/upgrade-market/lib/forge-std"]
+	path = w4d1-upgrade-market/upgrade-market/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "w4d1-upgrade-market/upgrade-market/lib/openzeppelin-contracts"]
+	path = w4d1-upgrade-market/upgrade-market/lib/openzeppelin-contracts
+	url = https://github.com/Openzeppelin/openzeppelin-contracts
