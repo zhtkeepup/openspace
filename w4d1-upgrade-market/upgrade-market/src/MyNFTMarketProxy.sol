@@ -21,19 +21,31 @@ contract MyNFTMarketProxy is ERC1967Proxy {
     /**
      * @dev Returns the admin of this proxy.
      */
-    function getAdmin() public returns (address) {
+    function getAdmin() public view returns (address) {
         return ERC1967Utils.getAdmin();
     }
 
-    function changeAdmin(address newAdmin) public {
-        if (ERC1967Utils.getAdmin() != msg.sender) {
-            revert ProxyDeniedAdminAccess();
+    function changeAdmin(address newAdmin, string memory checkCode) public {
+        if (isAdminTask(checkCode)) {
+            ERC1967Utils.changeAdmin(newAdmin);
+        } else {
+            super._fallback();
         }
-        ERC1967Utils.changeAdmin(newAdmin);
     }
 
     function getImplementation() public view returns (address) {
         return _implementation();
+    }
+
+    function isAdminTask(string memory checkCode) internal view returns (bool) {
+        if (
+            ERC1967Utils.getAdmin() == msg.sender &&
+            keccak256(bytes("isAdminTask")) == keccak256(bytes(checkCode))
+        ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -41,15 +53,13 @@ contract MyNFTMarketProxy is ERC1967Proxy {
      * Requirements:
      *
      * - If `data` is empty, `msg.value` must be zero.
+      管理员执行升级操作时，应该指定checkCode="isAdminTask"
      */
     function upgradeMarketImpl(
         address newImplementation,
         string memory checkCode
     ) public {
-        if (
-            ERC1967Utils.getAdmin() == msg.sender &&
-            keccak256(bytes("upgradeMarketImpl")) == keccak256(bytes(checkCode))
-        ) {
+        if (isAdminTask(checkCode)) {
             // (address newImplementation, bytes memory data) = abi.decode(msg.data[4:],(address, bytes));
             bytes memory data;
             ERC1967Utils.upgradeToAndCall(newImplementation, data);

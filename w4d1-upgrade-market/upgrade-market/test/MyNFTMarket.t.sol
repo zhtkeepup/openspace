@@ -84,10 +84,7 @@ contract TokenBankTest is Test {
     function test_nftBuyV2_impl() public {
         vm.startPrank(marketAdmin);
         console.log("before upgrade:", marketProxy.getImplementation());
-        marketProxy.upgradeMarketImpl(
-            address(myNFTMarketV2),
-            "upgradeMarketImpl"
-        );
+        marketProxy.upgradeMarketImpl(address(myNFTMarketV2), "isAdminTask");
         console.log("after upgrade:", marketProxy.getImplementation());
 
         //
