@@ -32,7 +32,7 @@ contract DeployV2AndUpgradeProxy is Script {
         );
 
         console.log("upgradeMarketImpl.... to: ", address(mm));
-        proxy.upgradeMarketImpl(address(mm), "upgradeMarketImpl");
+        proxy.upgradeMarketImpl(address(mm), "isAdminTask");
 
         /*
   MyNFTMarketV2 Address: 0x13736647e93DaE2ee9c47b8c390a133E9788F76D
@@ -41,3 +41,13 @@ contract DeployV2AndUpgradeProxy is Script {
         vm.stopBroadcast();
     }
 }
+
+/*
+Chain 11155111
+
+Estimated gas price: 25.158255286 gwei
+
+Estimated total gas used for script: 667404
+
+Estimated amount required: 0.016790720210897544 ETH
+*/
