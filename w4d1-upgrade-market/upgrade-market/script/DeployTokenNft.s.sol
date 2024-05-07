@@ -27,5 +27,10 @@ contract DeployTokenNft is Script {
         // Log the token address
         console.log("ERC20 Token Address:", address(token));
         console.log("ERC721 NFT Address:", address(nft));
+
+        /*
+  ERC20 Token Address: 0xee36856865c6792ACE7310Bd10DDf80492922175
+  ERC721 NFT Address: 0x334752232938E060755e2CeCe44D1664ca61d873
+        */
     }
 }

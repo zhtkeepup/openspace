@@ -46,13 +46,10 @@ contract MyNFTMarketProxy is ERC1967Proxy {
         address newImplementation,
         string memory checkCode
     ) public {
-        if (ERC1967Utils.getAdmin() == msg.sender) {
-            if (
-                keccak256(bytes("upgradeMarketImpl")) !=
-                keccak256(bytes(checkCode))
-            ) {
-                revert ProxyDeniedAdminAccess();
-            }
+        if (
+            ERC1967Utils.getAdmin() == msg.sender &&
+            keccak256(bytes("upgradeMarketImpl")) == keccak256(bytes(checkCode))
+        ) {
             // (address newImplementation, bytes memory data) = abi.decode(msg.data[4:],(address, bytes));
             bytes memory data;
             ERC1967Utils.upgradeToAndCall(newImplementation, data);
