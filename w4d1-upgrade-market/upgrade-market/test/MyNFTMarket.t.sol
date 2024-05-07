@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test, console} from "../lib/forge-std/src/Test.sol";
 
 import {MyERC721} from "../src/nft/MyERC721.sol";
 
@@ -11,7 +11,7 @@ import {MyNFTMarketProxy} from "../src/MyNFTMarketProxy.sol";
 import {MyNFTMarketV1} from "../src/MyNFTMarketV1.sol";
 import {MyNFTMarketV2} from "../src/MyNFTMarketV2.sol";
 
-import {MyERC721Permit} from "../src/nft/MyERC721Permit.sol";
+import {MyNFTMarketV2Permit} from "../src/MyNFTMarketV2Permit.sol";
 
 contract TokenBankTest is Test {
     MyNFTMarketV1 public myNFTMarketV1;
@@ -91,16 +91,19 @@ contract TokenBankTest is Test {
         MyNFTMarketV2 agentAsMarket = MyNFTMarketV2(address(marketProxy));
 
         vm.startPrank(eoaAAA);
-        // AAA账户先离线签名
-        MyERC721Permit.Permit memory permit = MyERC721Permit.Permit({
+        // AAA账户批量授权给market，然后离线签名指定的一个nft
+        nft.setApprovalForAll(address(marketProxy), true);
+
+        MyNFTMarketV2Permit.Permit memory permit = MyNFTMarketV2Permit.Permit({
             owner: address(eoaAAA),
             spender: address(marketProxy),
             tokenId: 1,
             amount: 1e17,
             nonce: 0
         });
-
-        bytes32 digest = nft.getTypedDataHash(permit);
+        console.log("eoaAAA-----:", eoaAAA);
+        bytes32 digest = agentAsMarket.getTypedDataHash(permit);
+        console.logBytes32(digest);
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(aaaPrivateKey, digest);
 
         ////
@@ -109,7 +112,7 @@ contract TokenBankTest is Test {
         assertEq(nft.balanceOf(address(eoaAAA)), 1);
         assertEq(nft.balanceOf(address(marketProxy)), 0);
 
-        // nft市场根据签名结果代替AAA上架.(不需要事先授权)
+        // nft市场根据签名结果代替AAA上架
         agentAsMarket.permitList(eoaAAA, 1, 1e17, v, r, s);
 
         assertEq(nft.balanceOf(address(eoaAAA)), 0);

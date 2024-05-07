@@ -11,10 +11,9 @@ import "./IERC721.sol";
 import "./IERC721Metadata.sol";
 
 import "./IERC721TokenReceiver.sol";
-import "./MyERC721Permit.sol";
 
 // , IERC721Metadata {
-contract MyERC721 is IERC165, IERC721, IERC721Metadata, MyERC721Permit {
+contract MyERC721 is IERC165, IERC721, IERC721Metadata {
     error ERC721CanNotBeZeroAddr();
     error ERC721IsNotOwnerOfNFT(uint256, address, address);
     error ERC721TokenIdIsInvalid(uint256);
@@ -269,41 +268,5 @@ contract MyERC721 is IERC165, IERC721, IERC721Metadata, MyERC721Permit {
         owners[_tokenId] = _to;
 
         emit Transfer(address(0), _to, _tokenId);
-    }
-
-    /* 授权nft市场上架nft
-     */
-    function permitApprovalForList(
-        address owner,
-        address spender,
-        uint256 tokenId,
-        uint256 amount, // 售价
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public virtual {
-        bytes32 structHash = keccak256(
-            abi.encode(
-                PERMIT_TYPEHASH,
-                owner,
-                spender,
-                tokenId,
-                amount,
-                _useNonce(owner)
-            )
-        );
-
-        bytes32 hash = _hashTypedDataV4(structHash);
-
-        address signer = ECDSA_recover(hash, v, r, s);
-        if (signer != owner) {
-            revert ERC2612InvalidSigner(signer, owner);
-        }
-
-        if (spender == address(0)) {
-            revert ERC721CanNotBeZeroAddr();
-        }
-        operatorApprovals[owner][spender] = true;
-        emit ApprovalForAll(owner, spender, true);
     }
 }

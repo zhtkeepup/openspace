@@ -11,8 +11,6 @@ import {MyNFTMarketProxy} from "../src/MyNFTMarketProxy.sol";
 import {MyNFTMarketV1} from "../src/MyNFTMarketV1.sol";
 import {MyNFTMarketV2} from "../src/MyNFTMarketV2.sol";
 
-import {MyERC721Permit} from "../src/nft/MyERC721Permit.sol";
-
 // forge script script/DeployTokenNft.s.sol:DeployTokenNft --rpc-url sepolia --private-key $PRIVATE_KEY --broadcast
 
 contract DeployMyNFTMarketV1 is Script {
