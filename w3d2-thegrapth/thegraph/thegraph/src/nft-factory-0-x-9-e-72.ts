@@ -6,17 +6,13 @@ import {
 } from "../generated/NFTFactory0x9e72/NFTFactory0x9e72"
 import {
   NFTCreated,
-  NFTRegesitered,
-  OwnershipTransferred,
   TokenInfo,
   Transfer
 } from "../generated/schema"
 
 import {BigInt, Bytes} from "@graphprotocol/graph-ts"
 
-import { S2NFT } from "../generated/templates/S2NFT/S2NFT"
-
-import { S2NFT as S2NFTDatasource } from "../generated/templates"
+import { NFTCreated as S2NFTDatasource } from "../generated/templates"
 
 export function handleNFTCreated(event: NFTCreatedEvent): void {
   let entity = new NFTCreated(
@@ -31,72 +27,5 @@ export function handleNFTCreated(event: NFTCreatedEvent): void {
 
   entity.save()
   S2NFTDatasource.create(event.params.nftCA);
-}
-
-export function handleNFTRegesitered(event: NFTRegesiteredEvent): void {
-  let entity = new NFTRegesitered(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.nftCA = event.params.nftCA
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleOwnershipTransferred(
-  event: OwnershipTransferredEvent
-): void {
-  let entity = new OwnershipTransferred(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.previousOwner = event.params.previousOwner
-  entity.newOwner = event.params.newOwner
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleTransfer(
-  event: TransferEvent
-): void {
-  let entity = new Transfer(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.tokenId = event.params.tokenId
-  entity.save()
-
-  let entityNFT = NFTCreated.load(event.address);
-
-  if(entityNFT != null) {
-    let contract = S2NFT.bind(event.address)
-    let tokenInfo = new TokenInfo(entityNFT.nftCA.toHexString().concat("#").concat(entity.tokenId.toString()));
-    tokenInfo.ca = entityNFT.nftCA;
-    tokenInfo.tokenId = entity.tokenId;
-    tokenInfo.tokenURL = contract.tokenURI(tokenInfo.tokenId);
-    tokenInfo.name = contract.name();
-    tokenInfo.owner = entity.to;
-
-    event.block.number = BigInt.zero();
-    tokenInfo.blockTimestamp = BigInt.zero();
-    tokenInfo.transactionHash = Bytes.fromI32(0);
-    // if(event.block.number === null) {
-    //   tokenInfo.blockNumber = BigInt.zero();
-    // } else {
-    //   tokenInfo.blockNumber = event.block.number;
-    // }
-    // tokenInfo.blockTimestamp = event.block.timestamp === null ? BigInt.zero() : event.block.timestamp;
-    // tokenInfo.transactionHash = event.transaction.hash === null ? Bytes.fromI32(0) : event.transaction.hash;
-
-    tokenInfo.save();
-  }
-
 }
 

@@ -17,23 +17,15 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - NFTCreated
-        - NFTRegesitered
-        - OwnershipTransferred
       abis:
         - name: NFTFactory0x9e72
           file: ./abis/NFTFactory0x9e72.json
       eventHandlers:
         - event: NFTCreated(address)
           handler: handleNFTCreated
-        - event: NFTRegesitered(address)
-          handler: handleNFTRegesitered
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,indexed uint256)
-          handler: handleTransfer
       file: ./src/nft-factory-0-x-9-e-72.ts
 templates:
-  - name: S2NFT
+  - name: NFTCreated
     kind: ethereum/contract
     network: sepolia
     source:
@@ -42,18 +34,13 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
+      file: ./src/nft-created.ts
       entities:
-        - Approval
-        - ApprovalForAll
+        - TokenInfo
         - Transfer
       abis:
         - name: S2NFT
           file: ./abis/S2NFT.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,indexed uint256)
-          handler: handleApproval
-        - event: ApprovalForAll(indexed address,indexed address,bool)
-          handler: handleApprovalForAll
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/nft-factory-0-x-9-e-72.ts
