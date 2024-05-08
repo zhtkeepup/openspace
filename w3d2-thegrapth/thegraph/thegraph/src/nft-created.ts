@@ -37,7 +37,7 @@ import {
       tokenInfo.name = contract.name();
       tokenInfo.owner = entity.to;
   
-      event.block.number = BigInt.zero();
+      // event.block.number = BigInt.zero();
       tokenInfo.blockTimestamp = BigInt.zero();
       tokenInfo.transactionHash = Bytes.fromI32(0);
       if(event.block.number === null) {
