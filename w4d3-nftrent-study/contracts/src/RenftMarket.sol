@@ -16,6 +16,10 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
  *      3. 领取租金：出租人可以随时领取租金
  */
 contract RenftMarket is EIP712 {
+    bytes32 ORDER_TYPE_HASH =
+        keccak256(
+            "RentoutOrder(address maker,address nft_ca,uint256 token_id,uint256 daily_rent,uint256 max_rental_duration,uint256 min_collateral,uint256 list_endtime)"
+        );
     // 出租订单事件
     event BorrowNFT(
         address indexed taker,
@@ -28,7 +32,7 @@ contract RenftMarket is EIP712 {
 
     error CheckError(string);
 
-    mapping(bytes32 => BorrowOrder) public orders; // 已租赁订单
+    mapping(bytes32 => BorrowOrder) public borrowedOrders; // 已租赁订单
     mapping(bytes32 => bool) public canceledOrders; // 已取消的挂单
 
     constructor() EIP712("RenftMarket", "1") {}
@@ -41,11 +45,41 @@ contract RenftMarket is EIP712 {
         RentoutOrder calldata order,
         bytes calldata makerSignature
     ) external payable {
-        if (order.list_endtime > block.timestamp) {
-            revert CheckError("expired");
+        if (msg.value < order.min_collateral) {
+            revert CheckError("insufficient!");
         }
-        if(order.)
-        revert("TODO");
+        if (order.list_endtime > block.timestamp) {
+            revert CheckError("list expired!");
+        }
+        if (order.maker == msg.sender) {
+            revert CheckError("can't borrow self's rentoutOrder!");
+        }
+        bytes32 hash = orderHash(order);
+        if (borrowedOrders[hash].taker != address(0)) {
+            revert CheckError("order already taken!");
+        }
+        if (canceledOrders[hash]) {
+            revert CheckError("order canceled!");
+        }
+
+        address signer = ECDSA.recover(hash, makerSignature);
+        if (signer != order.maker) {
+            revert CheckError("maker's signature is invalid!");
+        }
+
+        borrowedOrders[hash] = BorrowOrder({
+            taker: msg.sender,
+            collateral: msg.value,
+            start_time: block.timestamp,
+            rentinfo: order
+        });
+
+        IERC721(order.nft_ca).safeTransferFrom(
+            order.maker,
+            msg.sender,
+            order.token_id
+        );
+        emit BorrowNFT(msg.sender, order.maker, hash, msg.value);
     }
 
     /**
@@ -63,7 +97,21 @@ contract RenftMarket is EIP712 {
     function orderHash(
         RentoutOrder calldata order
     ) public view returns (bytes32) {
-        revert("TODO");
+        return
+            _hashTypedDataV4(
+                keccak256(
+                    abi.encode(
+                        ORDER_TYPE_HASH,
+                        order.maker,
+                        order.nft_ca,
+                        order.token_id,
+                        order.daily_rent,
+                        order.max_rental_duration,
+                        order.min_collateral,
+                        order.list_endtime
+                    )
+                )
+            );
     }
 
     struct RentoutOrder {
