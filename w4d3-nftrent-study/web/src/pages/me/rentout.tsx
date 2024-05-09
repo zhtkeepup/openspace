@@ -80,12 +80,18 @@ export default function Rentout() {
           Math.ceil(Date.now() / 1000) +
             Number(listLifetimeRef.current!.value) * oneday
         ),
-      } as RentoutOrderMsg;
+      }; //as RentoutOrderMsg;
 
       console.log("info:", chainId, PROTOCOL_CONFIG[chainId!].domain);
 
-      // TODO 请求钱包签名，获得签名信息
-      const signature = "0x0000...0000";
+      // 请求钱包签名，获得签名信息
+      const signature = await signTypedData(config, {
+        // connector,
+        domain: PROTOCOL_CONFIG[chainId!].domain,
+        types: eip721Types,
+        primaryType: "RentoutOrder",
+        message: order,
+      });
 
       console.log("signature", signature);
 
