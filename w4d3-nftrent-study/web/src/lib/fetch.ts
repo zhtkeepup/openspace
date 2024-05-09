@@ -182,15 +182,9 @@ export function useWriteApproveTx(nft: NFTInfo | null) {
   // 读合约：获取是否已经授权
   // https://wagmi.sh/react/api/hooks/useReadContract#type-inference
   // 或者检查是否有整个集合授权给MKT合约
-  // var approveTo = undefined;
+  var approveTo = undefined;
 
-  //查询NFT是否已经授权给市场合约
-  const { data: approveTo } = useReadContract({
-    abi: ERC721ABI,
-    address: nft?.ca as Address,
-    functionName: "getApproved",
-    args: [nft?.tokenId],
-  });
+  // TODO 查询NFT是否已经授权给市场合约
 
   return {
     hash,
@@ -200,14 +194,8 @@ export function useWriteApproveTx(nft: NFTInfo | null) {
     isConfirmed,
     isApproved: approveTo === mkt?.address,
     sendTx: () => {
-      // 写合约：调用NFT合约，将 NFT 授权给市场合约
+      // TODO 写合约：调用NFT合约，将 NFT 授权给市场合约
       // https://wagmi.sh/react/guides/write-to-contract#_4-hook-up-the-usewritecontract-hook
-      return writeContract({
-        address: nft?.ca as Address,
-        abi: ERC721ABI,
-        functionName: "approve",
-        args: [mkt?.address, nft?.tokenId],
-      });
     },
   };
 }

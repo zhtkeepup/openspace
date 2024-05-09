@@ -17,8 +17,6 @@ export default function NFTCard(props: { nft: NFTInfo }) {
     );
   }, [metaRes]);
 
-  let metaRes_data_description = "metaRes.data.description..啥都没有...";
-
   return (
     <div className="card card-compact glass">
       <figure>
@@ -38,7 +36,7 @@ export default function NFTCard(props: { nft: NFTInfo }) {
       <div className="card-body">
         <h2 className="card-title text-sm">{props.nft.name}</h2>
         <p className="text-sm max-w-60  text-base-content">
-          {metaRes_data_description}
+          {metaRes.data.description}
         </p>
       </div>
     </div>

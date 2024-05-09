@@ -3,7 +3,6 @@ import { verifyTypedData } from "@wagmi/core";
 import { wagmiConfig, PROTOCOL_CONFIG, eip721Types } from "@/config";
 import { NFTInfo, RentoutOrderMsg } from "@/types";
 import { saveOrder } from "@/pages/api/db";
-import { verify } from "crypto";
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,14 +40,6 @@ function verifyingOrder(
   order: any,
   signature: any
 ): Promise<boolean> {
-  // 验证订单签名
-  return verifyTypedData(wagmiConfig, {
-    chainId: chainId,
-    domain: PROTOCOL_CONFIG[chainId].domain,
-    types: eip721Types,
-    message: order,
-    primaryType: "RentoutOrder",
-    address: order.maker,
-    signature: signature,
-  });
+  // TODO: 验证订单签名
+  return false as any;
 }
