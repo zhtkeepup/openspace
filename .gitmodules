@@ -79,3 +79,12 @@
 [submodule "w4d3-nftrent-study/contracts/lib/openzeppelin-contracts"]
 	path = w4d3-nftrent-study/contracts/lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "w4d4-ido/lib/forge-std"]
+	path = w4d4-ido/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "w4d4-ido/lib/solmate"]
+	path = w4d4-ido/lib/solmate
+	url = https://github.com/transmissions11/solmate
+[submodule "w4d4-ido/lib/openzeppelin-contracts"]
+	path = w4d4-ido/lib/openzeppelin-contracts
+	url = https://github.com/Openzeppelin/openzeppelin-contracts
