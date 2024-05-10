@@ -94,6 +94,7 @@ contract ZKIDOTest is Test {
         // /////////////
         // 第二个用户
         vm.startPrank(eoaBBB);
+
         aBalance1 = eoaBBB.balance;
         psEth1 = zkido.presaleCap();
         console.log("test_XXZKIDO1:", aBalance1, psEth1);
@@ -153,7 +154,24 @@ contract ZKIDOTest is Test {
         );
         console.log("price2:", 1e17);
 
+        vm.stopPrank();
         // 其他场景测试.......
         // .....
+
+        // 项目方提现
+        vm.startPrank(mmAdmin);
+
+        uint256 aBalancexx1 = mmAdmin.balance;
+
+        zkido.withdraw();
+
+        uint256 aBalancexx2 = mmAdmin.balance;
+
+        // 超募，应该提取到硬顶金额
+        assertEq(aBalancexx1 + zkido.hardcap(), aBalancexx2);
+
+        console.log("hhhhh1:", aBalancexx1);
+        console.log("hhhhh2:", aBalancexx2);
+        console.log("hhhhh3:", zkido.hardcap());
     }
 }
