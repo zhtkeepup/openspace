@@ -10,4 +10,8 @@
 1. permitPrePay() : 调用 token 的 permit 进行授权
 2. claimNFT() : 通过默克尔树验证白名单，并利用 permitPrePay 的授权，转入 token 转出 NFT 。
 
-## 实现
+## xxx
+
+### 测试截图:
+
+![测试截图](./resources/1.png "测试截图")
