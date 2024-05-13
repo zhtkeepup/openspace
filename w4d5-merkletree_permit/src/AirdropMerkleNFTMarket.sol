@@ -12,7 +12,7 @@ contract AirdropMerkleNFTMarket is MyNFTMarketV2, Multicall {
     // merkle root node , generated at offChain.
 
     bytes32 public merkleRoot =
-        0x530175c016f9e0d56caa449e833e78e240db7c71fc2861c5efaa086772c73ac1; //
+        0x4f76b259648ab5b58dd9b430513aff80be045d543913258f15d2979126bdfb7d; //
 
     constructor(
         address _tokenAc,
@@ -46,13 +46,14 @@ contract AirdropMerkleNFTMarket is MyNFTMarketV2, Multicall {
         );
     }
 
+    event fkMsg(address, bytes32);
     function claimNFT(
         uint256 tokenId,
         uint256 halfPriceAmt,
         bytes32[] calldata _merkleProof
     ) external {
         bytes32 leaf = keccak256(abi.encodePacked(msg.sender));
-
+        emit fkMsg(msg.sender, leaf);
         require(
             MerkleProof.verify(_merkleProof, merkleRoot, leaf),
             "merkle verified error!"

@@ -12,16 +12,24 @@ let whitelistAddresses = [
 ];
 
 const leaves = whitelistAddresses.map((addr) => keccak256(addr));
-const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
-const root = tree.getRoot().toString("hex");
+// const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
+const tree = new MerkleTree(leaves, keccak256, { sort: true });
+// const root_xxx = tree.getRoot().toString("hex");
+const root = tree.getHexRoot();
 // console.log("0x" + root);
 // root: 0x5010d2b3d938779ec375de2449ded66e13e6f393b39d5c6475b33b6855a7072d
 // console.log("tree:\n", tree.toString());
 
 function printMerkleProof(address) {
+  console.log("my keccak256:", keccak256(address));
   const leaf = keccak256(address);
-  console.log(tree.getHexProof(leaf)[0]);
-  // const proof = tree.getProof(leaf);
+  const proof = tree.getHexProof(leaf);
+  console.log(proof);
+  //   console.log("===================root:");
+  //   console.log(root);
+
+  //   console.log("===================");
+  //   console.log(tree.toString());
   // console.log(JSON.stringify(proof));
   // console.log(address);
 }

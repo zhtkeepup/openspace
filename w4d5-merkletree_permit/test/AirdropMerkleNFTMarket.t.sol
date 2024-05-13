@@ -81,19 +81,8 @@ contract AirdropMerkleNFTMarketTest is Test {
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(bbbPrivateKey, digest);
 
         ////
-        // // 2. mmAdmin用户使用离线签名，将BBB的token授权给market
-        console.log(
-            "before permitPrePay:",
-            token.allowance(eoaBBB, address(market))
-        );
-        vm.startPrank(mmAdmin);
-        market.permitPrePay(eoaBBB, 10 * 1e18, _deadline, v, r, s);
-        console.log(
-            "after permitPrePay:",
-            token.allowance(eoaBBB, address(market))
-        );
 
-        // // 3. eoaAAA用户在市场上架NFT，然后BBB用户购买，属于白名单，应该以挂单价的一半成交.
+        // // 2. eoaAAA用户在市场上架NFT。 后续，BBB用户购买，属于白名单，应该以挂单价的一半成交.
         uint256 nftId = 1;
         uint256 price = 1e17;
 
@@ -101,22 +90,109 @@ contract AirdropMerkleNFTMarketTest is Test {
         nft.approve(address(market), nftId);
         market.list(nftId, price);
 
-        // B用户
-        string[] memory cmds = new string[](2);
-        cmds[0] = "node";
-        cmds[1] = "javascript/src/whitelist-merkletree.js";
+        // string[] memory cmds = new string[](2);
+        // cmds[0] = "node";
+        // cmds[1] = "javascript/src/whitelist-merkletree.js";
+
+        // console.logBytes(vm.ffi(cmds));
+
+        // // 3. B用户 购买。
+        vm.startPrank(eoaBBB);
+
+        // fff_normal(_deadline, v, r, s, nftId, price);
+
+        fff_multicall(_deadline, v, r, s, nftId, price);
+    }
+
+    function fff_multicall(
+        uint256 _deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s,
+        uint256 nftId,
+        uint256 price
+    ) public {
+        uint256 tokenBalance1 = token.balanceOf(eoaBBB);
+        uint256 nftBalance1 = nft.balanceOf(eoaBBB);
+
+        bytes[] memory calldatas = new bytes[](2);
+        calldatas[0] = abi.encodeCall(
+            market.permitPrePay,
+            (eoaBBB, 10 * 1e18, _deadline, v, r, s)
+        );
 
         bytes32[] memory _merkleProof = new bytes32[](1);
 
-        _merkleProof[0] = bytes32(vm.ffi(cmds));
-        console.logBytes32(_merkleProof[0]);
-        // 0x756e646566696e65640000000000000000000000000000000000000000000000
-        //
+        // 由链下系统读取的merkle proof， 这里直接固定赋值.
         _merkleProof[
             0
-        ] = 0x89ab0aac7fd5bddc5a80851c27af374c9ce62114029e525fb41212e79b547d34;
+        ] = 0xb77cd6e78250fc179507e63db4a067bf94a54f7c43da7c04744a20c4b8833aeb;
+
+        calldatas[1] = abi.encodeCall(
+            market.claimNFT,
+            (nftId, price / 2, _merkleProof)
+        );
+
+        /////
+
+        bytes[] memory results = market.multicall(calldatas);
+        assertEq(results[0], "");
+        assertEq(results[1], "");
+
+        uint256 tokenBalance2 = token.balanceOf(eoaBBB);
+        uint256 nftBalance2 = nft.balanceOf(eoaBBB);
+
+        console.log("multi-bal1: ", tokenBalance1, nftBalance1);
+        console.log("multi-bal2: ", tokenBalance2, nftBalance2);
+        console.log("multi-price", price, tokenBalance1 - tokenBalance2);
+
+        assertEq(nftBalance2 - nftBalance1, 1);
+        assertEq(tokenBalance1 - tokenBalance2, price / 2);
+    }
+
+    function fff_normal(
+        uint256 _deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s,
+        uint256 nftId,
+        uint256 price
+    ) public {
+        // 首先使用离线签名，将BBB的token授权给market
+        console.log(
+            "before permitPrePay:",
+            token.allowance(eoaBBB, address(market))
+        );
+        market.permitPrePay(eoaBBB, 10 * 1e18, _deadline, v, r, s);
+        console.log(
+            "after permitPrePay:",
+            token.allowance(eoaBBB, address(market))
+        );
+
+        ////
+        uint256 tokenBalance1 = token.balanceOf(eoaBBB);
+        uint256 nftBalance1 = nft.balanceOf(eoaBBB);
+
+        bytes32[] memory _merkleProof = new bytes32[](1);
+
+        // 由链下系统读取的merkle proof， 这里直接固定赋值.
+        _merkleProof[
+            0
+        ] = 0xb77cd6e78250fc179507e63db4a067bf94a54f7c43da7c04744a20c4b8833aeb;
+
+        // _merkleProof[
+        //     1
+        // ] = 0xf84943292c1035f8068f4c9e0c9c43e1ab4d97bea157d677a3510858cdeae4aa;
         market.claimNFT(nftId, price / 2, _merkleProof);
-        // address loadedAddress = abi.decode(result, (address));
-        // market.claimNFT(1, 1, _merkleProof);
+
+        uint256 tokenBalance2 = token.balanceOf(eoaBBB);
+        uint256 nftBalance2 = nft.balanceOf(eoaBBB);
+
+        console.log("bal1: ", tokenBalance1, nftBalance1);
+        console.log("bal2: ", tokenBalance2, nftBalance2);
+        console.log("price", price, tokenBalance1 - tokenBalance2);
+
+        assertEq(nftBalance2 - nftBalance1, 1);
+        assertEq(tokenBalance1 - tokenBalance2, price / 2);
     }
 }
