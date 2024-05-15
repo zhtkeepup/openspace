@@ -1,6 +1,7 @@
-pragma solidity =0.5.16;
+// pragma solidity =0.5.16;
+pragma solidity =0.8.20;
 
-import '../UniswapV2ERC20.sol';
+import "../UniswapV2ERC20.sol";
 
 contract ERC20 is UniswapV2ERC20 {
     constructor(uint _totalSupply) public {

@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-pragma solidity >=0.5.0;
+// pragma solidity >=0.5.0;
+pragma solidity =0.8.20;
 
-import '../libraries/SafeERC20Namer.sol';
+import "../libraries/SafeERC20Namer.sol";
 
 // used for testing the logic of token naming
 contract SafeERC20NamerTest {
@@ -16,9 +17,7 @@ contract SafeERC20NamerTest {
 }
 
 // does not implement name or symbol
-contract NamerTestFakeOptionalERC20 {
-
-}
+contract NamerTestFakeOptionalERC20 {}
 
 // complies with ERC20 and returns strings
 contract NamerTestFakeCompliantERC20 {

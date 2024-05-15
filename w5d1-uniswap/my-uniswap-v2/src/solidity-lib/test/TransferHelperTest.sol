@@ -1,24 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-pragma solidity >=0.6.0;
+// pragma solidity >=0.6.0;
+pragma solidity =0.8.20;
 
-import '../libraries/TransferHelper.sol';
+import "../libraries/TransferHelper.sol";
 
 // test helper for transfers
 contract TransferHelperTest {
-    function safeApprove(
-        address token,
-        address to,
-        uint256 value
-    ) external {
+    function safeApprove(address token, address to, uint256 value) external {
         TransferHelper.safeApprove(token, to, value);
     }
 
-    function safeTransfer(
-        address token,
-        address to,
-        uint256 value
-    ) external {
+    function safeTransfer(address token, address to, uint256 value) external {
         TransferHelper.safeTransfer(token, to, value);
     }
 
@@ -47,7 +40,7 @@ contract TransferHelperTestFakeERC20Compliant {
     }
 
     function transfer(address, uint256) external view returns (bool) {
-        require(!shouldRevert, 'REVERT');
+        require(!shouldRevert, "REVERT");
         return success;
     }
 
@@ -56,12 +49,12 @@ contract TransferHelperTestFakeERC20Compliant {
         address,
         uint256
     ) external view returns (bool) {
-        require(!shouldRevert, 'REVERT');
+        require(!shouldRevert, "REVERT");
         return success;
     }
 
     function approve(address, uint256) external view returns (bool) {
-        require(!shouldRevert, 'REVERT');
+        require(!shouldRevert, "REVERT");
         return success;
     }
 }
@@ -78,11 +71,7 @@ contract TransferHelperTestFakeERC20Noncompliant {
         require(!shouldRevert);
     }
 
-    function transferFrom(
-        address,
-        address,
-        uint256
-    ) external view {
+    function transferFrom(address, address, uint256) external view {
         require(!shouldRevert);
     }
 
@@ -103,6 +92,6 @@ contract TransferHelperTestFakeFallback {
     }
 
     function withdraw() external {
-        msg.sender.transfer(address(this).balance);
+        payable(msg.sender).transfer(address(this).balance);
     }
 }
