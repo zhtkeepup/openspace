@@ -1,5 +1,4 @@
-// pragma solidity >=0.5.0;
-pragma solidity =0.8.20;
+pragma solidity >=0.5.0;
 
 interface IWETH {
     function deposit() external payable;
