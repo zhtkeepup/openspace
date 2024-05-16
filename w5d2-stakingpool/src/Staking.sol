@@ -10,10 +10,12 @@ contract Staking is IStaking {
     KKToken kk;
     address admin;
 
-    uint256 constant AMOUNT_PER_BLOCK = 1e19; // 10 * 1e18. KK Token 是每一个区块产出 10 个
+    uint128 constant REWARD_DECIMAL = 1e9; // 奖励数量，的精度
+
+    uint256 constant AMOUNT_PER_BLOCK = 10 * REWARD_DECIMAL; // 10 * 1e9. KK Token 是每一个区块产出 10 个
     //
     struct RewardInfo {
-        uint128 accuE18rewardsPerETH; // （上次计算时）奖励率的累加值（奖励率：每个以太币每个区块可获取的奖励数量（放大1e18倍））
+        uint128 accuE9rewardsPerETH; // （上次计算时）奖励率的累加值（奖励率：每个以太币每个区块可获取的奖励数量（放大1e9倍））
         uint128 lastUpdateBlock; // 上次计算时的区块编号
         uint128 ethAmount; // (上次计算时)质押的eth数量
     }
@@ -22,7 +24,7 @@ contract Staking is IStaking {
 
     struct UserRewardInfo {
         uint128 rewardAmount; // 已计算获得但未领取的奖励
-        uint128 accuE18rewardsPerETH; // （上次计算时）奖励率的累加值（奖励率：每个以太币每个区块可获取的奖励数量（放大1e18倍））
+        uint128 accuE9rewardsPerETH; // （上次计算时）奖励率的累加值（奖励率：每个以太币每个区块可获取的奖励数量（放大1e9倍））
         uint128 lastUpdateBlock; // 上次计算时的区块编号
         uint128 ethAmount; // 质押的eth数量
     }
@@ -41,7 +43,7 @@ contract Staking is IStaking {
     }
 
     function updateReward() private {
-        gRewardInfo.accuE18rewardsPerETH += uint128(
+        gRewardInfo.accuE9rewardsPerETH += uint128(
             ((block.number - gRewardInfo.lastUpdateBlock) *
                 (AMOUNT_PER_BLOCK * 1e18)) / gRewardInfo.ethAmount
         ); //
@@ -54,8 +56,8 @@ contract Staking is IStaking {
 
         ur.rewardAmount +=
             (ur.ethAmount *
-                (gRewardInfo.accuE18rewardsPerETH - ur.accuE18rewardsPerETH)) /
-            1e18;
+                (gRewardInfo.accuE9rewardsPerETH - ur.accuE9rewardsPerETH)) /
+            REWARD_DECIMAL;
 
         if (newEthAmount > 0) {
             if (doStake) {
@@ -67,7 +69,7 @@ contract Staking is IStaking {
             }
         }
 
-        ur.accuE18rewardsPerETH = gRewardInfo.accuE18rewardsPerETH;
+        ur.accuE9rewardsPerETH = gRewardInfo.accuE9rewardsPerETH;
         ur.lastUpdateBlock = gRewardInfo.lastUpdateBlock;
     }
 
