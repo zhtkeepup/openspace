@@ -121,3 +121,9 @@
 [submodule "w5d1-uniswap/my-uniswap-v2/lib/openzeppelin-contracts"]
 	path = w5d1-uniswap/my-uniswap-v2/lib/openzeppelin-contracts
 	url = https://github.com/Openzeppelin/openzeppelin-contracts
+[submodule "w5d2-stakingpool/lib/forge-std"]
+	path = w5d2-stakingpool/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "w5d2-stakingpool/lib/openzeppelin-contracts"]
+	path = w5d2-stakingpool/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
