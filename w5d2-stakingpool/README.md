@@ -1,4 +1,12 @@
-## 题目
+## 测试截图
+
+![测试截图](./resources/test1.png "测试截图")
+
+## -------
+
+## 附录
+
+### 题目
 
 编写 StakingPool 合约，实现 Stake 和 Unstake 方法，允许任何人质押 ETH 来赚钱 KK Token。其中 KK Token 是每一个区块产出 10 个，产出的 KK Token 需要根据质押时长和质押数量来公平分配。
 
@@ -48,14 +56,6 @@ interface IStaking {
 }
 
 ```
-
-## 测试截图
-
-![测试截图](./resources/test1.png "测试截图")
-
-## -------
-
-## 附录
 
 ### 奖励率累加原理
 
